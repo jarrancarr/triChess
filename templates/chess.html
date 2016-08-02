@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{{page "head"}}
+		{{ajax "test" "test123" "test"}}
+		<defs>
+			<filter id="jamspread">
+				<feGaussianBlur stdDeviation="1" in="SourceGraphic" result="result0" id="feGaussianBlur5067" />
+				<feTurbulence result="result1" numOctaves="7" seed="488" baseFrequency="0.017" type="turbulence" id="feTurbulence5069" />
+				<feComposite in="result0" in2="result1" operator="out" result="result2" id="feComposite5071" />
+				<feGaussianBlur stdDeviation="0.5" result="result5" id="feGaussianBlur5073" />
+				<feSpecularLighting in="result5" specularExponent="100" specularConstant="4" result="result4" surfaceScale="1.5" id="feSpecularLighting5075">
+					<feDistantLight azimuth="225" elevation="62" id="feDistantLight5077" />
+				</feSpecularLighting>
+				<feComposite operator="atop" in="result4" in2="result2" result="result91" id="feComposite5079" />
+				<feBlend mode="multiply" in2="result91" id="feBlend5081" />
+    		</filter>
+	</head>
+	<body onload='setBackground("{{item "background" }}")' >
+		<div class="container">
+			<div class="row"> 
+				<div class="col-xs-2 dfn strong panel"></div>
+				<div class="col-xs-10">{{page "banner"}}</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-2">
+					{{menu "nav"}}
+				</div>
+				<div class="col-xs-10">
+					<svg xmlns="http://www.w3.org/2000/svg" height="720" width="960">
+						{{range index .Data "triChessBoard"}}
+							{{.}}
+						{{end}}
+					</svg>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

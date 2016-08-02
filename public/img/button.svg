@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.1"
+   id="svg4310"
+   viewBox="0 0 300 100"
+   height="100"
+   width="300">
+  <defs
+     id="defs4312">
+    <linearGradient
+       id="linearGradient5098">
+      <stop
+         style="stop-color:#c0c000;stop-opacity:1;"
+         offset="0"
+         id="stop5108" />
+      <stop
+         id="stop5114"
+         offset="0.5208165"
+         style="stop-color:#402040;stop-opacity:0.73725492" />
+      <stop
+         style="stop-color:#c0c000;stop-opacity:0.50149256"
+         offset="1"
+         id="stop5110" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="470.36652"
+       x2="510.45337"
+       y1="510.77261"
+       x1="238.74255"
+       id="linearGradient5104"
+       xlink:href="#linearGradient5098" />
+    <filter
+       height="1.0989189"
+       y="-0.04945946"
+       width="1.0316883"
+       x="-0.015844156"
+       id="filter5128"
+       style="color-interpolation-filters:sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur5130"
+         stdDeviation="2.3107239" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata4315">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-211.96339,-432.48581)"
+     id="layer1">
+    <rect
+       ry="29.294424"
+       y="432.48581"
+       x="211.96339"
+       height="112.12693"
+       width="350.01785"
+       id="rect4868"
+       style="opacity:0.75;fill:url(#linearGradient5104);fill-opacity:1;stroke:#c0ffff;stroke-opacity:1;filter:url(#filter5128)" />
+  </g>
+</svg>
