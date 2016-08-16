@@ -11,6 +11,163 @@ import (
 
 var triChess *website.Site
 
+type Board struct {
+	piece []Piecer
+}
+
+type Piecer interface {
+	Moves(b *Board) []Move
+	GetPiece() *Piece
+}
+type Piece struct {
+	rank, file int
+	team bool
+}
+func (p Piece) GetRank() int { return p.rank }
+func (p Piece) GetFile() int { return p.file }
+func (p Piece) GetTeam() bool { return p.team }
+type Pawn struct {
+	p *Piece
+	moved bool
+}
+type Rook struct {
+	p *Piece
+	moved bool
+}
+type Knight struct {
+	p *Piece
+}
+type Bishop struct {
+	p *Piece
+}
+type Cannon struct {
+	p *Piece
+}
+type Queen struct {
+	p *Piece
+}
+type King struct {
+	p *Piece
+	moved bool
+}
+
+type Move struct {
+	rank, file int
+}
+
+func checkMove(b *Board, p *Piece, r, f int, moves []Move) bool {
+	who := b.getPieceAt(r,f)
+	if who == nil {
+		moves = append(moves,Move{r,f})
+		return true
+	}
+	return false
+}
+func checkAttack(b *Board, p *Piece, r, f int, moves []Move) bool {
+	who := b.getPieceAt(p.GetRank()+r,p.GetFile()+f)
+	if who != nil && who.GetPiece().GetTeam() == !p.GetTeam() {
+		moves = append(moves,Move{p.GetRank()+r,p.GetFile()+f})
+		return true
+	}
+	return false
+}
+func checkMoveAttack(b *Board, p *Piece, r, f int, moves []Move) {
+	checkMove(b, p, r, f, moves)
+	checkAttack(b, p, r, f, moves)
+}
+func (p Pawn) Moves(b *Board) []Move {
+	moves := make([]Move,0)
+	dir := 1
+	if p.p.team { dir := -1 }
+	checkMove(b, p.p, dir,0, moves)
+	if (!p.moved) { checkMove(b, p.p, 2*dir,0, moves) }
+	checkAttack(b, p.p, dir, -1, moves)
+	checkAttack(b, p.p, dir, 1, moves)
+	return moves
+}
+func (p Pawn) GetPiece() *Piece { return p.p }
+func (r Rook) Moves(b *Board) []Move {
+	moves := make([]Move,0)
+	rank := 0
+	for rank = 1; checkMove(b, r.p, rank, 0, moves); rank += 1 {}
+	checkAttack(b,r.p,rank, 0,moves)
+	for rank = -1; checkMove(b , r.p, rank, 0, moves); rank -= 1 {}
+	checkAttack(b,r.p,rank, 0,moves)
+	file := 0
+	for file = 1; checkMove(b, r.p, 0, file, moves); file += 1 {}
+	checkAttack(b, r.p, 0, file ,moves)
+	for file = -1; checkMove(b, r.p, 0, file, moves); file -= 1 {}
+	checkAttack(b, r.p, 0, file, moves)
+	return moves
+}
+func (r Rook) GetPiece() *Piece { return r.p }
+func (n Knight) Moves(b *Board) []Move {
+	moves := make([]Move,0)
+	dir := ((n.p.rank + n.p.file) % 2 )*2 - 1
+	checkMoveAttack(b, n.p, 2*dir, -1, moves)
+	checkMoveAttack(b, n.p, 2*dir, 1, moves)
+	checkMoveAttack(b, n.p, 1*dir, -2, moves)
+	checkMoveAttack(b, n.p, 1*dir, 2, moves)
+	checkMoveAttack(b, n.p, 0, -3, moves)
+	checkMoveAttack(b, n.p, 0, 3, moves)
+	checkMoveAttack(b, n.p, -1*dir, -4, moves)
+	checkMoveAttack(b, n.p, -1*dir, 4, moves)
+	checkMoveAttack(b, n.p, -2*dir, -3, moves)
+	checkMoveAttack(b, n.p, -2*dir, -1, moves)
+	checkMoveAttack(b, n.p, -2*dir, 1, moves)
+	checkMoveAttack(b, n.p, -2*dir, 3, moves)
+	return moves
+}
+func (n Knight) GetPiece() *Piece { return n.p }
+func (B Bishop) Moves(b *Board) []Move {
+	moves := make([]Move,0)
+	rank := 0
+	for rank = 1; checkMove(b, B.p, rank, 0, moves); rank += 1 {}
+	checkAttack(b,B.p,rank, 0,moves)
+	for rank = -1; checkMove(b , B.p, rank, 0, moves); rank -= 1 {}
+	checkAttack(b,B.p,rank, 0,moves)
+	file := 0
+	for file = 1; checkMove(b, B.p, 0, file, moves); file += 1 {}
+	checkAttack(b, B.p, 0, file ,moves)
+	for file = -1; checkMove(b, B.p, 0, file, moves); file -= 1 {}
+	checkAttack(b, B.p, 0, file, moves)
+	return moves
+}
+func (b Board) setup() {
+	b.piece = make([]Piecer,0)
+	b.piece = append(b.piece,Rook{&Piece{1,4,false}, false})
+	b.piece = append(b.piece,Rook{&Piece{1,12,false}, false})
+	b.piece = append(b.piece,Knight{&Piece{1,5,false}})
+	b.piece = append(b.piece,Knight{&Piece{1,11,false}})
+	b.piece = append(b.piece,Bishop{&Piece{1,6,false}})
+	b.piece = append(b.piece,Bishop{&Piece{1,10,false}})
+	b.piece = append(b.piece,Queen{&Piece{1,7,false}})
+	b.piece = append(b.piece,Cannon{&Piece{1,8,false}})
+	b.piece = append(b.piece,King{&Piece{1,9,false}, false})
+	for i := 3 ; i < 13 ; i++ {
+		b.piece = append(b.piece,Pawn{&Piece{2,i,false}, false})
+		b.piece = append(b.piece,Pawn{&Piece{7,i,true}, false})
+	}	
+	b.piece = append(b.piece,Rook{&Piece{8,4,true}, false})
+	b.piece = append(b.piece,Rook{&Piece{8,12,true}, false})
+	b.piece = append(b.piece,Knight{&Piece{8,5,true}})
+	b.piece = append(b.piece,Knight{&Piece{8,11,true}})
+	b.piece = append(b.piece,Bishop{&Piece{8,6,true}})
+	b.piece = append(b.piece,Bishop{&Piece{8,10,true}})
+	b.piece = append(b.piece,Queen{&Piece{8,7,true}})
+	b.piece = append(b.piece,Cannon{&Piece{8,8,true}})
+	b.piece = append(b.piece,King{&Piece{8,9,true}, false})
+}
+
+func (b Board) getPieceAt(rank, file int) Piecer {
+	for p := range(b.piece) {
+		if p.p.rank == rank && p.p.file == file {
+			return p
+		}
+	}
+	return nil
+}
+
 func main() {
 	website.ResourceDir = ".."
 	setup()
