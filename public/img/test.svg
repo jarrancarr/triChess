@@ -9,146 +9,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 744.09448819 1052.3622047"
-   id="svg4249"
+   width="1000"
+   height="600"
+   viewBox="0 0 1000 600"
+   id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="test.svg">
   <defs
-     id="defs4251">
-    <filter
-       inkscape:label="Jam Spread"
-       inkscape:menu="Textures"
-       inkscape:menu-tooltip="Glossy clumpy jam spread"
-       style="color-interpolation-filters:sRGB;"
-       id="filter5065">
-      <feGaussianBlur
-         stdDeviation="1"
-         in="SourceGraphic"
-         result="result0"
-         id="feGaussianBlur5067" />
-      <feTurbulence
-         result="result1"
-         numOctaves="7"
-         seed="488"
-         baseFrequency="0.017"
-         type="turbulence"
-         id="feTurbulence5069" />
-      <feComposite
-         in="result0"
-         in2="result1"
-         operator="out"
-         result="result2"
-         id="feComposite5071" />
-      <feGaussianBlur
-         stdDeviation="0.5"
-         result="result5"
-         id="feGaussianBlur5073" />
-      <feSpecularLighting
-         in="result5"
-         specularExponent="100"
-         specularConstant="4"
-         result="result4"
-         surfaceScale="1.5"
-         id="feSpecularLighting5075">
-        <feDistantLight
-           azimuth="225"
-           elevation="62"
-           id="feDistantLight5077" />
-      </feSpecularLighting>
-      <feComposite
-         operator="atop"
-         in="result4"
-         in2="result2"
-         result="result91"
-         id="feComposite5079" />
-      <feBlend
-         mode="multiply"
-         in2="result91"
-         id="feBlend5081" />
-    </filter>
-    <filter
-       inkscape:label="Cracked Glass"
-       inkscape:menu="Textures"
-       inkscape:menu-tooltip="Under a cracked glass"
-       style="color-interpolation-filters:sRGB;"
-       id="filter5101">
-      <feTurbulence
-         baseFrequency="0.1"
-         seed="50"
-         numOctaves="5"
-         result="result1"
-         type="fractalNoise"
-         id="feTurbulence5103" />
-      <feGaussianBlur
-         stdDeviation="4"
-         result="result7"
-         id="feGaussianBlur5105" />
-      <feDisplacementMap
-         result="result5"
-         in="SourceGraphic"
-         scale="20"
-         xChannelSelector="G"
-         in2="result7"
-         id="feDisplacementMap5107" />
-      <feComposite
-         result="result2"
-         operator="in"
-         in2="result1"
-         in="result5"
-         id="feComposite5109" />
-      <feGaussianBlur
-         stdDeviation="1"
-         result="result6"
-         id="feGaussianBlur5111" />
-      <feSpecularLighting
-         surfaceScale="-3"
-         result="result4"
-         specularConstant="3.5"
-         specularExponent="35"
-         in="result6"
-         id="feSpecularLighting5113">
-        <feDistantLight
-           elevation="45"
-           azimuth="225"
-           id="feDistantLight5115" />
-      </feSpecularLighting>
-      <feComposite
-         k1="1.7"
-         k3="0.7"
-         in2="result2"
-         in="result4"
-         operator="arithmetic"
-         result="result91"
-         id="feComposite5117" />
-      <feBlend
-         result="fbSourceGraphic"
-         mode="multiply"
-         in2="result91"
-         id="feBlend5119" />
-      <feComposite
-         in2="fbSourceGraphic"
-         in="fbSourceGraphic"
-         result="result2"
-         operator="arithmetic"
-         id="feComposite5121" />
-      <feComposite
-         in="result2"
-         result="result4"
-         operator="arithmetic"
-         k2="2"
-         k3="2"
-         in2="fbSourceGraphic"
-         id="feComposite5123" />
-      <feBlend
-         mode="screen"
-         in="result4"
-         in2="result4"
-         id="feBlend5125" />
-    </filter>
-  </defs>
+     id="defs4" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -156,19 +25,20 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="23.787981"
-     inkscape:cy="559.16192"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="469.68133"
+     inkscape:cy="271.13904"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
+     units="px"
      inkscape:window-width="1672"
      inkscape:window-height="1138"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
-     id="metadata4254">
+     id="metadata7">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -182,23 +52,259 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
-    <path
-       sodipodi:type="star"
-       style="opacity:0.81499999;fill:#7d7e5d;fill-opacity:0.87349399;stroke:#3d4254;stroke-opacity:0.98192767;filter:url(#filter5101)"
-       id="path5087"
-       sodipodi:sides="3"
-       sodipodi:cx="225.71429"
-       sodipodi:cy="270.93362"
-       sodipodi:r1="117.68169"
-       sodipodi:r2="58.840843"
-       sodipodi:arg1="0.57790194"
-       sodipodi:arg2="1.6250995"
-       inkscape:flatsided="false"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m 324.28572,335.21934 -101.7651,-5.53161 -101.7651,-5.5316 55.67306,-85.36536 55.67306,-85.36536 46.09204,90.89696 z"
-       inkscape:transform-center-x="3.1936737"
-       inkscape:transform-center-y="-26.611252" />
+     id="layer1"
+     transform="translate(0,-452.36216)">
+    <g
+       id="g4181"
+       style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">
+      <rect
+         y="491.82034"
+         x="34.438"
+         height="527.11401"
+         width="328.11395"
+         id="rect4142"
+         style="opacity:1;fill:#cdcdf1;fill-opacity:1;stroke:#3d4254;stroke-width:2;stroke-opacity:0.98192767;stroke-miterlimit:4;stroke-dasharray:none" />
+      <text
+         sodipodi:linespacing="50%"
+         id="text4144"
+         y="512.94067"
+         x="142.43152"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:50%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+         xml:space="preserve"><tspan
+           style="font-size:15px;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
+           y="512.94067"
+           x="142.43152"
+           id="tspan4146"
+           sodipodi:role="line">Client Browser</tspan></text>
+    </g>
+    <g
+       id="g4168"
+       transform="translate(-22.223354,-40.406102)"
+       style="stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none">
+      <rect
+         y="574.46539"
+         x="77.687149"
+         height="188.07756"
+         width="285.05222"
+         id="rect4148"
+         style="opacity:1;fill:#c7f5f7;fill-opacity:1;stroke:#3d4254;stroke-width:1;stroke-opacity:0.98192767;stroke-miterlimit:4;stroke-dasharray:none" />
+      <text
+         sodipodi:linespacing="50%"
+         id="text4144-4"
+         y="592.26654"
+         x="84.202072"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:50%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+         xml:space="preserve"><tspan
+           style="font-size:12.5px;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+           y="592.26654"
+           x="84.202072"
+           id="tspan4146-7"
+           sodipodi:role="line">heartBeat()</tspan></text>
+    </g>
+    <g
+       transform="translate(358.09907,-3.6167831e-5)"
+       id="g4181-8"
+       style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">
+      <g
+         id="g4210"
+         style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">
+        <rect
+           style="opacity:1;fill:#cdcdf1;fill-opacity:1;stroke:#3d4254;stroke-width:2;stroke-opacity:0.98192767;stroke-miterlimit:4;stroke-dasharray:none"
+           id="rect4142-7"
+           width="576.2265"
+           height="526.729"
+           x="34.630501"
+           y="492.01285" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:50%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+           x="276.7818"
+           y="513.95081"
+           id="text4144-0"
+           sodipodi:linespacing="50%"><tspan
+             sodipodi:role="line"
+             id="tspan4146-2"
+             x="276.7818"
+             y="513.95081"
+             style="font-size:15px;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">Ditmac Server</tspan></text>
+      </g>
+    </g>
+    <rect
+       style="opacity:1;fill:#f5c7f7;fill-opacity:1;stroke:#3d4254;stroke-width:0.84736919;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.98192767"
+       id="rect4148-2"
+       width="536.75262"
+       height="130.6713"
+       x="414.48682"
+       y="535.48834" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:50%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="420.58289"
+       y="552.87061"
+       id="text4144-4-9"
+       sodipodi:linespacing="50%"><tspan
+         sodipodi:role="line"
+         x="420.58289"
+         y="552.87061"
+         style="font-size:12.5px"
+         id="tspan4250">UserAccountService</tspan><tspan
+         sodipodi:role="line"
+         x="420.58289"
+         y="559.12061"
+         style="font-size:12.5px"
+         id="tspan4254" /><tspan
+         sodipodi:role="line"
+         x="420.58289"
+         y="565.37061"
+         style="font-size:12.5px"
+         id="tspan4256" /><tspan
+         sodipodi:role="line"
+         x="420.58289"
+         y="571.62061"
+         style="font-size:12.5px"
+         id="tspan4258">activeAccounts  Map&lt;SessionId, UserAccount&gt;</tspan></text>
+    <rect
+       style="opacity:1;fill:#f5c7f7;fill-opacity:1;stroke:#3d4254;stroke-width:0.7864641;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.98192767"
+       id="rect4148-2-9"
+       width="536.81354"
+       height="112.54945"
+       x="414.45633"
+       y="686.47565" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:50%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="429.72986"
+       y="711.99579"
+       id="text4144-4-9-3"
+       sodipodi:linespacing="50%"><tspan
+         sodipodi:role="line"
+         x="429.72986"
+         y="711.99579"
+         style="font-size:12.5px"
+         id="tspan4258-3">UserAccount</tspan><tspan
+         sodipodi:role="line"
+         x="429.72986"
+         y="718.24579"
+         style="font-size:12.5px"
+         id="tspan4309" /><tspan
+         sodipodi:role="line"
+         x="429.72986"
+         y="724.49579"
+         style="font-size:12.5px"
+         id="tspan4311" /><tspan
+         sodipodi:role="line"
+         x="429.72986"
+         y="730.74579"
+         style="font-size:12.5px"
+         id="tspan4313">Time sessionOpenTime, lastHeartBeat</tspan></text>
+    <rect
+       style="opacity:1;fill:#f5c7f7;fill-opacity:1;stroke:#3d4254;stroke-width:0.84736919;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.98192767"
+       id="rect4148-2-6"
+       width="536.75262"
+       height="130.6713"
+       x="416.50711"
+       y="817.32092" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:50%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="434.13916"
+       y="844.24341"
+       id="text4144-4-9-3-6"
+       sodipodi:linespacing="50%"><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="844.24341"
+         style="font-size:12.5px"
+         id="tspan4258-3-1">AccessController</tspan><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="850.49341"
+         style="font-size:12.5px"
+         id="tspan4357" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="856.74341"
+         style="font-size:12.5px"
+         id="tspan4359" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="862.99341"
+         style="font-size:12.5px"
+         id="tspan4361">public Boolean heartBeat() {</tspan><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="869.24341"
+         style="font-size:12.5px"
+         id="tspan4363" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="875.49341"
+         style="font-size:12.5px"
+         id="tspan4365" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="881.74341"
+         style="font-size:12.5px"
+         id="tspan4367">    hey userAccountService, is UserAccount ID 1029 still alive?</tspan><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="887.99341"
+         style="font-size:12.5px"
+         id="tspan4375">    </tspan><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="894.24341"
+         style="font-size:12.5px"
+         id="tspan4377" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="900.49341"
+         style="font-size:12.5px"
+         id="tspan4379">        Yes: Great, return true and reset UserAccount timeout.</tspan><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="906.74341"
+         style="font-size:12.5px"
+         id="tspan4381" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="912.99341"
+         style="font-size:12.5px"
+         id="tspan4383" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="919.24341"
+         style="font-size:12.5px"
+         id="tspan4385">        No: Error- InvalidSessionError</tspan><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="925.49341"
+         style="font-size:12.5px"
+         id="tspan4369" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="931.74341"
+         style="font-size:12.5px"
+         id="tspan4371" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="937.99341"
+         style="font-size:12.5px"
+         id="tspan4373">}</tspan><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="944.24341"
+         style="font-size:12.5px"
+         id="tspan4309-5" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="950.49341"
+         style="font-size:12.5px"
+         id="tspan4311-2" /><tspan
+         sodipodi:role="line"
+         x="434.13916"
+         y="956.74341"
+         style="font-size:12.5px"
+         id="tspan4313-2" /></text>
   </g>
 </svg>
