@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{{page "head"}}
+		{{ajax  "var:statement" "url:clubs" "trigger:post" "handler:postStatement" "target:chat" "data:'statement':statement"}}
+		{{ajax  "var:createRoom" "handler:createRoom" "target:rooms" "setup:createRoom = $('#statement').val();" "url:clubs" "trigger:createRoom" "data:'roomRequest':createRoom" "success:roomPanel"}}
+		<script>
+			$(document).ready( function(){
+				{{range index .Script "clubs"}}
+					{{.}}
+				{{end}}
+			});
+			function collapsable() { 
+				$('.accordian').each(function(index, node){ 
+					$(node).click(function(){  
+						$(this).find('div').slideToggle('fast'); 
+					});  
+				}); 
+			}
+		</script>
+	</head>
+	<body onload='setBackground("{{item "background" }}")' >
+		<div class="container">
+			<div class="row"> 
+				<div class="col-xs-2 dfn strong panel"></div>
+				<div class="col-xs-10">{{page "banner"}}</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-2">
+					{{menu "nav"}}
+				</div>
+				<div class="col-xs-10">
+					{{target "rooms"}}
+					{{target "chat"}}
+					<input id="statement" type="field"/>
+					<input id="createRoom-trigger" type="button" value="createRoom" />
+					<input id="post-trigger" type="button" value="post" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -18,11 +18,11 @@
     padding:10px;	 	 
 }
 #footer {
-    background-color:black;
-    color:white;
-    clear:both;
-    text-align:center;
-   padding:5px;	 	 
+	background-color:black;
+	color:white;
+	clear:both;
+	text-align:center;
+	padding:5px;	 	 
 }
 
 .upTri {
@@ -52,14 +52,17 @@
 }
 
 html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+	font-family: sans-serif;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
 }
 body {
-  margin: 0;
-  background: url(../img/oliveOrchard1.bpg);
-  background-size: cover;
+	color: #ccf;
+	font: 15px arial, sans-serif;
+	margin: 0;
+	background: #587;
+	background-size: cover;
+	line-height: 1.428571429;
 }
 article,
 aside,
@@ -160,7 +163,7 @@ input,
 optgroup,
 select,
 textarea {
-  color: inherit;
+  color: #224;
   font: inherit;
   margin: 0;
 }
@@ -317,13 +320,6 @@ th {
 html {
   font-size: 62.5%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-body {
-  font-family: Open Sans;
-  font-size: 14px;
-  line-height: 1.428571429;
-  color: #333333;
-  background-color: #ffffff;
 }
 input,
 button,
@@ -5830,4 +5826,29 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+div.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+}
+
+div.panel.show {
+    display: block;
 }

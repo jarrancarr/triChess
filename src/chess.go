@@ -50,7 +50,6 @@ type King struct {
 	p *Piece
 	moved bool
 }
-
 type Move struct {
 	rank, file int
 }
@@ -78,7 +77,7 @@ func checkMoveAttack(b *Board, p *Piece, r, f int, moves []Move) {
 func (p Pawn) Moves(b *Board) []Move {
 	moves := make([]Move,0)
 	dir := 1
-	if p.p.team { dir := -1 }
+	if p.p.team { dir = -1 }
 	checkMove(b, p.p, dir,0, moves)
 	if (!p.moved) { checkMove(b, p.p, 2*dir,0, moves) }
 	checkAttack(b, p.p, dir, -1, moves)
@@ -122,17 +121,99 @@ func (n Knight) GetPiece() *Piece { return n.p }
 func (B Bishop) Moves(b *Board) []Move {
 	moves := make([]Move,0)
 	rank := 0
-	for rank = 1; checkMove(b, B.p, rank, 0, moves); rank += 1 {}
-	checkAttack(b,B.p,rank, 0,moves)
-	for rank = -1; checkMove(b , B.p, rank, 0, moves); rank -= 1 {}
-	checkAttack(b,B.p,rank, 0,moves)
+	for rank = 1; checkMove(b, B.p, rank, 0, moves); rank += 1 {
+		checkAttack(b,B.p,rank, 0,moves)
+	}
+	for rank = -1; checkMove(b , B.p, rank, 0, moves); rank -= 1 {
+		checkAttack(b,B.p,rank, 0,moves)
+	}
 	file := 0
-	for file = 1; checkMove(b, B.p, 0, file, moves); file += 1 {}
-	checkAttack(b, B.p, 0, file ,moves)
-	for file = -1; checkMove(b, B.p, 0, file, moves); file -= 1 {}
-	checkAttack(b, B.p, 0, file, moves)
+	for file = 1; checkMove(b, B.p, 0, file, moves); file += 1 {
+		checkAttack(b, B.p, 0, file ,moves)
+	}
+	for file = -1; checkMove(b, B.p, 0, file, moves); file -= 1 {
+		checkAttack(b, B.p, 0, file, moves)
+	}
 	return moves
 }
+func (B Bishop) GetPiece() *Piece { return B.p }
+func (q Queen) Moves(b *Board) []Move {
+	moves := make([]Move,0)
+	rank := 0
+	for rank = 1; checkMove(b, q.p, rank, 0, moves); rank += 1 {
+		checkAttack(b,q.p,rank, 0,moves)	
+	}
+	for rank = -1; checkMove(b , q.p, rank, 0, moves); rank -= 1 {
+		checkAttack(b,q.p,rank, 0,moves)
+	}	
+	file := 0
+	for file = 1; checkMove(b, q.p, 0, file, moves); file += 1 {
+		checkAttack(b, q.p, 0, file ,moves)
+	}
+	for file = -1; checkMove(b, q.p, 0, file, moves); file -= 1 {
+		checkAttack(b, q.p, 0, file, moves)
+	}
+	for rank = 1; checkMove(b, q.p, rank, 0, moves); rank += 1 {
+		checkAttack(b,q.p,rank, 0,moves)
+	}
+	for rank = -1; checkMove(b , q.p, rank, 0, moves); rank -= 1 {
+		checkAttack(b,q.p,rank, 0,moves)
+	}
+	file = 0
+	for file = 1; checkMove(b, q.p, 0, file, moves); file += 1 {
+		checkAttack(b, q.p, 0, file ,moves)
+	}
+	for file = -1; checkMove(b, q.p, 0, file, moves); file -= 1 {
+		checkAttack(b, q.p, 0, file, moves)
+	}
+	return moves
+}
+func (q Queen) GetPiece() *Piece { return q.p }
+func (c Cannon) Moves(b *Board) []Move { // moves like a horse, attacks like the queen, but not on adjacent square
+	moves := make([]Move,0)
+	dir := ((c.p.rank + c.p.file) % 2 )*2 - 1
+	checkMove(b, c.p, 2*dir, -1, moves)
+	checkMove(b, c.p, 2*dir, 1, moves)
+	checkMove(b, c.p, 1*dir, -2, moves)
+	checkMove(b, c.p, 1*dir, 2, moves)
+	checkMove(b, c.p, 0, -3, moves)
+	checkMove(b, c.p, 0, 3, moves)
+	checkMove(b, c.p, -1*dir, -4, moves)
+	checkMove(b, c.p, -1*dir, 4, moves)
+	checkMove(b, c.p, -2*dir, -3, moves)
+	checkMove(b, c.p, -2*dir, -1, moves)
+	checkMove(b, c.p, -2*dir, 1, moves)
+	checkMove(b, c.p, -2*dir, 3, moves)
+	rank := 0
+	for rank = 2; b.getPieceAt(c.p.GetRank()+rank,c.p.GetFile())==nil; rank += 1 {
+		checkAttack(b,c.p,rank, 0,moves)	
+	}
+	for rank = -2; b.getPieceAt(c.p.GetRank()+rank,c.p.GetFile())==nil; rank -= 1 {
+		checkAttack(b,c.p,rank, 0,moves)
+	}	
+	file := 0
+	for file = 2; b.getPieceAt(c.p.GetRank(),c.p.GetFile()+file)==nil; file += 1 {
+		checkAttack(b, c.p, 0, file ,moves)
+	}
+	for file = -2; b.getPieceAt(c.p.GetRank(),c.p.GetFile()+file)==nil; file -= 1 {
+		checkAttack(b, c.p, 0, file, moves)
+	}
+	for rank = 2; b.getPieceAt(c.p.GetRank()+file,c.p.GetFile()+file)==nil; rank += 1 {
+		checkAttack(b,c.p,rank, 0,moves)
+	}
+	for rank = -2; b.getPieceAt(c.p.GetRank()+file,c.p.GetFile()+file)==nil; rank -= 1 {
+		checkAttack(b,c.p,rank, 0,moves)
+	}
+	for rank = 2; b.getPieceAt(c.p.GetRank()+file,c.p.GetFile()-file)==nil; rank += 1 {
+		checkAttack(b,c.p,rank, 0,moves)
+	}
+	for rank = -2; b.getPieceAt(c.p.GetRank()+file,c.p.GetFile()-file)==nil; rank -= 1 {
+		checkAttack(b,c.p,rank, 0,moves)
+	}
+	return moves
+}
+func (c Cannon) GetPiece() *Piece { return c.p }
+
 func (b Board) setup() {
 	b.piece = make([]Piecer,0)
 	b.piece = append(b.piece,Rook{&Piece{1,4,false}, false})
@@ -160,13 +241,31 @@ func (b Board) setup() {
 }
 
 func (b Board) getPieceAt(rank, file int) Piecer {
-	for p := range(b.piece) {
-		if p.p.rank == rank && p.p.file == file {
+	for _,p := range(b.piece) {
+		if p.GetPiece().rank == rank && p.GetPiece().file == file {
 			return p
 		}
 	}
 	return nil
 }
+func (k King) Moves(b *Board) []Move {
+	moves := make([]Move,0)
+	dir := ((k.GetPiece().rank + k.GetPiece().file) % 2 )*2 - 1
+	checkMoveAttack(b, k.p, dir, -2, moves)
+	checkMoveAttack(b, k.p, dir, -1, moves)
+	checkMoveAttack(b, k.p, dir, 0, moves)
+	checkMoveAttack(b, k.p, dir, 1, moves)
+	checkMoveAttack(b, k.p, dir, 2, moves)
+	checkMoveAttack(b, k.p, 0, -2, moves)
+	checkMoveAttack(b, k.p, 0, -1, moves)
+	checkMoveAttack(b, k.p, 0, 1, moves)
+	checkMoveAttack(b, k.p, 0, 2, moves)
+	checkMoveAttack(b, k.p, dir, -1, moves)
+	checkMoveAttack(b, k.p, dir, 0, moves)
+	checkMoveAttack(b, k.p, dir, 1, moves)
+	return moves
+}
+func (k King) GetPiece() *Piece { return k.p }
 
 func main() {
 	website.ResourceDir = ".."
@@ -180,7 +279,7 @@ func main() {
 
 func setup() {
 	//website
-	triChess = website.CreateSite("chess", "localhost:8070")
+	triChess = website.CreateSite("chess", "localhost:8070", "en")
 	triChess.AddMenu("nav").
 		AddItem("My Games", "/games").
 		AddItem("Settings", "/settings").
@@ -417,6 +516,23 @@ func setup() {
 					<path d="M 17.5,26 L 27.5,26 M 15,30 L 30,30 M 22.5,15.5 L 22.5,20.5 M 20,18 L 25,18" style="fill:none; stroke:#000000; stroke-linejoin:miter;" />
 				</g>`,offX+200+i*250,offY+410, i+1)))
 	}
+	
+	
+	clubs := triChess.AddPage("clubs", "clubs", "/clubs")
+	clubs.AddAJAXHandler("postStatement", mgs.PostStatement)
+	clubs.AddAJAXHandler("createRoom", mgs.CreateRoom)
+	clubs.AddParam("roomPanel",`
+		var ul = $( "<ul/>", {"class": "my-new-list"}); 
+		var obj = JSON.parse(data);	
+		$("#rooms").empty(); 
+		$("#rooms").append(ul); 
+		$.each(obj, function(i,val) { 
+			console.log('adding room '+i); 
+			room = $('<li />', { } ).appendTo(ul);
+			button = $('<button />', { 'class':'accordian', 'text': i + ' - ' + val } ).appendTo(room); 
+			$('<div />', { 'class':'panel', 'text': 'occupants:' } ).appendTo(button); 
+		}); 
+		collapsable();`)
 }
 
 func triangle(offX,offY,scaleX,scaleY,perspective,px1,py1,px2,py2,px3,py3 int, pClass, id string, up int) template.HTML {
