@@ -7,6 +7,7 @@ import (
 
 	"github.com/jarrancarr/website"
 	"github.com/jarrancarr/website/service"
+	"github.com/jarrancarr/website/html"
 )
 
 var triChess *website.Site
@@ -280,15 +281,13 @@ func main() {
 func setup() {
 	//website
 	triChess = website.CreateSite("chess", "localhost:8070", "en")
-	triChess.AddMenu("nav").
-		AddItem("My Games", "/games").
-		AddItem("Settings", "/settings").
-		AddItem("New Game", "/newGame").
-		AddItem("Teams", "/teams").
-		AddItem("Clubs", "/clubs").
-		AddItem("Message", "/message").
-		AddItem("Login", "/login").
-		Add("nav nav-pills nav-stacked", "", "")
+	triChess.Html.Add("nav", "ul", []string{"class::nav nav-pills nav-stacked"}).
+		AddTo("nav","li",[]string{"My Games","url::/games"}).
+		AddTo("nav","li",[]string{"New Game","url::/settings"}).
+		AddTo("nav","li",[]string{"Teams","url::/newGame"}).
+		AddTo("nav","li",[]string{"Clubs","url::/teams"}).
+		AddTo("nav","li",[]string{"Message","url::/clubs"}).
+		AddTo("nav","li",[]string{"Login","url::/login"})
 
 	// services
 	acs := website.CreateAccountService()
@@ -311,23 +310,27 @@ func setup() {
 	spaces := 4
 	perspective := 2
 	indexId := 0
-	chess.Data["triChessBoard"] = append(chess.Data["triChessBoard"], 
-		template.HTML(fmt.Sprintf("<circle transform='skewX(12) scale(1,0.66)' cx='%d' cy='%d' r='%d' stroke='black' stroke-width='2' fill='#412'/>",
-			offX+272, offY+443, 470)))
+	
+	chess.Html.Add("triChessBoard", "svg", []string{"xmlns::http://www.w3.org/2000/svg", "height=::720", "width=960"})
+	chess.Html.AddTo("triChessBoard", "circle", []string{
+		"transform::skewX(12) scale(1,0.66)", 
+		fmt.Sprintf("cx::%d",offX+272), 
+		fmt.Sprintf("cy::%d",offY+443), 
+		fmt.Sprintf("r::%d",470), 
+		"stroke::black", "stroke-width::2", "fill::#412"})
+	
 	for y := 0; y<spaces; y++ {
 		scaleY += perspective
 		for x := 0; x<spaces+1+y; x++ {
 			if x>0 {
-				chess.Data["triChessBoard"] = append(chess.Data["triChessBoard"], 
-					triangle(offX,offY,scaleX,scaleY,perspective,
+				chess.Html.AddTo("triChessBoard", "polygon", triangle(offX,offY,scaleX,scaleY,perspective,
 					2*x-y,2*y,2*x-y+1,2*y+2,2*x-y+2,2*y,"downTri", string(boardId[y*2])+"_"+string(boardId[x-y+19]),0))
-				chess.Script["board"] = append(chess.Script["board"], template.JS(fmt.Sprintf(
+				chess.Data["board"] = append(chess.Data["board"], fmt.Sprintf(
 					`$().ready(function() { document.getElementById('%s').addEventListener('click', function(event) { alert('fda'); $(this).css({fill:#919}); } ); });`, 
-					string(boardId[y*2])+"_"+string(boardId[x-y+19]))))
+					string(boardId[y*2])+"_"+string(boardId[x-y+19])))
 					indexId ++
 			}
-			chess.Data["triChessBoard"] = append(chess.Data["triChessBoard"], 
-				triangle(offX,offY,scaleX,scaleY,perspective,
+			chess.Html.AddTo("triChessBoard", "polygon", triangle(offX,offY,scaleX,scaleY,perspective,
 				2*x-y+1,2*y+2,2*x-y+2,2*y,2*x-y+3,2*y+2,"upTri", string(boardId[y*2+1])+"_"+string(boardId[x-y+19]),1))
 					indexId ++
 		}
@@ -336,33 +339,55 @@ func setup() {
 		scaleY += perspective
 		for x := 0; x<spaces*3-y; x++ {
 			if x>0 {		
-				chess.Data["triChessBoard"] = append(chess.Data["triChessBoard"], 
-					triangle(offX,offY,scaleX,scaleY,perspective,
+				chess.Html.AddTo("triChessBoard", "polygon", triangle(offX,offY,scaleX,scaleY,perspective,
 					2*x+y+3-spaces*2,2*y+2,2*x+y+2-spaces*2,2*y,2*x+y+1-spaces*2,2*y+2,"upTri", 
 					string(boardId[y*2+1])+"_"+string(boardId[x+15]),1))
 					indexId ++
 			}	
-			chess.Data["triChessBoard"] = append(chess.Data["triChessBoard"], 
-				triangle(offX,offY,scaleX,scaleY,perspective,
+			chess.Html.AddTo("triChessBoard", "polygon", triangle(offX,offY,scaleX,scaleY,perspective,
 					2*x+y+2-spaces*2,2*y,2*x+y+3-spaces*2,2*y+2,2*x+y+4-spaces*2,2*y,"downTri", 
 					string(boardId[y*2])+"_"+string(boardId[x+16]),0))
 				indexId ++			
 		}
 	}
-			
-	chess.Data["piece"] = append(chess.Data["piece"], 
-		template.HTML(fmt.Sprintf(`
-			<g transform="translate(%d,%d) scale(1.1)" id="blackKing" style="fill:none; fill-opacity:1; fill-rule:evenodd; stroke:#000000; stroke-width:1.5; stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4; stroke-dasharray:none; stroke-opacity:1;">
-				<path d="M 22.5,11.63 L 22.5,6" style="fill:none; stroke:#000000; stroke-linejoin:miter;" id="path6570" />
-				<path d="M 22.5,25 C 22.5,25 27,17.5 25.5,14.5 C 25.5,14.5 24.5,12 22.5,12 C 20.5,12 19.5,14.5 19.5,14.5 C 18,17.5 22.5,25 22.5,25"	style="fill:#000000;fill-opacity:1; stroke-linecap:butt; stroke-linejoin:miter;" />
-				<path d="M 11.5,37 C 17,40.5 27,40.5 32.5,37 L 32.5,30 C 32.5,30 41.5,25.5 38.5,19.5 C 34.5,13 25,16 22.5,23.5 L 22.5,27 L 22.5,23.5 C 19,16 9.5,13 6.5,19.5 C 3.5,25.5 11.5,29.5 11.5,29.5 L 11.5,37 z " style="fill:#000000; stroke:#000000;" />
-				<path d="M 20,8 L 25,8" style="fill:none; stroke:#000000; stroke-linejoin:miter;" />
-				<path d="M 32,29.5 C 32,29.5 40.5,25.5 38.03,19.85 C 34.15,14 25,18 22.5,24.5 L 22.51,26.6 L 22.5,24.5 C 20,18 9.906,14 6.997,19.85 C 4.5,25.5 11.85,28.85 11.85,28.85" style="fill:none; stroke:#ffffff;" />
-				<path d="M 11.5,30 C 17,27 27,27 32.5,30 M 11.5,33.5 C 17,30.5 27,30.5 32.5,33.5 M 11.5,37 C 17,34 27,34 32.5,37" style="fill:none; stroke:#ffffff;" />
-			</g>`,offX+215,offY-20)))
-	chess.Data["piece"] = append(chess.Data["piece"], 
-		template.HTML(fmt.Sprintf(`
-			<g transform="translate(%d,%d) scale(1.1)" id="blackQueen" style="opacity:1; fill:000000; fill-opacity:1; fill-rule:evenodd; stroke:#000000; stroke-width:1.5; stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4; stroke-dasharray:none; stroke-opacity:1;">
+	
+	chess.Html.Add("blackKing", "g", []string{
+		fmt.Sprintf("transform:::translate(%d,%d) scale(1.1)",offX+215,offY-20)),
+		"id:::blackKing",
+		"style:::fill:none; fill-opacity:1; fill-rule:evenodd; stroke:#000000; stroke-width:1.5; stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4; stroke-dasharray:none; stroke-opacity:1;" }
+	chess.Html.AddTo("blackKing", "path", []string{
+		"d:::M 22.5,11.63 L 22.5,6",
+		"style:::fill:none; stroke:#000000; stroke-linejoin:miter;",
+		"id:::path6570"
+	}	
+	chess.Html.AddTo("blackKing", "path", []string{
+		"d:::M 22.5,25 C 22.5,25 27,17.5 25.5,14.5 C 25.5,14.5 24.5,12 22.5,12 C 20.5,12 19.5,14.5 19.5,14.5 C 18,17.5 22.5,25 22.5,25",
+		"style:::fill:#000000;fill-opacity:1; stroke-linecap:butt; stroke-linejoin:miter;"
+	}	
+	chess.Html.AddTo("blackKing", "path", []string{
+		"d:::M 11.5,37 C 17,40.5 27,40.5 32.5,37 L 32.5,30 C 32.5,30 41.5,25.5 38.5,19.5 C 34.5,13 25,16 22.5,23.5 L 22.5,27 L 22.5,23.5 C 19,16 9.5,13 6.5,19.5 C 3.5,25.5 11.5,29.5 11.5,29.5 L 11.5,37 z ",
+		"style:::fill:#000000; stroke:#000000;"
+	}	
+	chess.Html.AddTo("blackKing", "path", []string{
+		"d:::M 20,8 L 25,8",
+		"style:::fill:none; stroke:#000000; stroke-linejoin:miter;"
+	}	
+	chess.Html.AddTo("blackKing", "path", []string{
+		"d:::M 32,29.5 C 32,29.5 40.5,25.5 38.03,19.85 C 34.15,14 25,18 22.5,24.5 L 22.51,26.6 L 22.5,24.5 C 20,18 9.906,14 6.997,19.85 C 4.5,25.5 11.85,28.85 11.85,28.85",
+		"fill:none; stroke:#ffffff;"
+	}	
+	chess.Html.AddTo("blackKing", "path", []string{
+		"d:::M 11.5,30 C 17,27 27,27 32.5,30 M 11.5,33.5 C 17,30.5 27,30.5 32.5,33.5 M 11.5,37 C 17,34 27,34 32.5,37",
+		"fill:none; stroke:#ffffff;"
+	}
+	
+	chess.Html.Add("blackQueen", "g", []string{
+		"transform:::translate(%d,%d) scale(1.1)",
+		"id:::blackQueen", 
+		"style:::opacity:1; fill:000000; fill-opacity:1; fill-rule:evenodd; stroke:#000000; stroke-width:1.5; stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4; stroke-dasharray:none; stroke-opacity:1;"	
+	}
+	chess.Html.Tag("blackQueen",)
+
 				<g style="fill:#000000; stroke:none;">
 					<circle cx="6"    cy="12" r="2.75" />	<circle cx="14"   cy="9"  r="2.75" />	<circle cx="22.5" cy="8"  r="2.75" />	<circle cx="31"   cy="9"  r="2.75" />	<circle cx="39"   cy="12" r="2.75" />
 				</g>
@@ -535,10 +560,11 @@ func setup() {
 		collapsable();`)
 }
 
-func triangle(offX,offY,scaleX,scaleY,perspective,px1,py1,px2,py2,px3,py3 int, pClass, id string, up int) template.HTML {
-	return template.HTML(fmt.Sprintf(
-		"<polygon id='%s' class='%s' points='%d,%d %d,%d %d,%d' />", id, pClass,
-			offX+px1*(scaleX+scaleY+up*perspective), offY+py1*(scaleY+up*perspective), 
+func triangle(offX,offY,scaleX,scaleY,perspective,px1,py1,px2,py2,px3,py3 int, id, pClass string, up int) []string {
+	return []string{
+		fmt.Sprintf("id:::%s", id),
+		fmt.Sprintf("class:::%s", pClass),
+		fmt.Sprintf("points:::%d,%d %d,%d %d,%d", offX+px1*(scaleX+scaleY+up*perspective), offY+py1*(scaleY+up*perspective), 
 			offX+px2*(scaleX+scaleY+(1-up)*perspective), offY+py2*(scaleY+(1-up)*perspective), 
-			offX+px3*(scaleX+scaleY+up*perspective), offY+py3*(scaleY+up*perspective)))
+			offX+px3*(scaleX+scaleY+up*perspective), offY+py3*(scaleY+up*perspective))}
 }
